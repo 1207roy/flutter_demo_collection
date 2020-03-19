@@ -11,3 +11,6 @@ As shown in tutorial, you will need to create a firebase application with a fire
 
 To connect with the firebase, App needs a specific google-service.json file at android/app directory
 and to read that google-service.json file, we will need to add google-serive plugin dependency inside both build.gradle files.
+
+Our firestore database is like this</br>
+![Alt text](firestore_database_ss.png)
