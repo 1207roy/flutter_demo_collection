@@ -1,4 +1,5 @@
 import 'package:flutter/material.dart';
+import 'package:state_management/app_routes.dart' as app_routes;
 
 void main() {
   runApp(MyApp());
@@ -10,23 +11,8 @@ class MyApp extends StatelessWidget {
     return MaterialApp(
       title: 'Flutter Demo',
       theme: ThemeData(primarySwatch: Colors.blue),
-      home: MyHomePage(title: 'State Management Demo'),
+      initialRoute: app_routes.initialRoute,
+      routes: app_routes.routesMap,
     );
-  }
-}
-
-class MyHomePage extends StatefulWidget {
-  MyHomePage({Key key, this.title}) : super(key: key);
-
-  final String title;
-
-  @override
-  _MyHomePageState createState() => _MyHomePageState();
-}
-
-class _MyHomePageState extends State<MyHomePage> {
-  @override
-  Widget build(BuildContext context) {
-
   }
 }
