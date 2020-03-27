@@ -1,4 +1,4 @@
-import 'package:equatable/equatable.dart';
+import 'package:equatabl e/equatable.dart';
 import 'package:flutter/cupertino.dart';
 
 class TimerEvent extends Equatable {
