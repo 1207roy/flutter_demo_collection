@@ -20,8 +20,8 @@ class HomePage extends StatelessWidget {
       child: FractionallySizedBox(
         alignment: Alignment.topRight,
         widthFactor: 0.8,
-        child: Column(
-          mainAxisAlignment: MainAxisAlignment.center,
+        child: ListView(
+          shrinkWrap: true,
           children: <Widget>[
             _buildFlutterVanillaButton(context),
             _buildFlutterBlocVanillaButton(context),
