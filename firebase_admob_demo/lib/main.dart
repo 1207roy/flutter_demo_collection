@@ -39,7 +39,7 @@ class MyHomePage extends StatefulWidget {
 
 bool _bannerAdShown = false;
 
-///state of the reward ad
+///state of the reward ad, to handle the Reward Ad text (either 'Reward Ad' or 'Reward ad video is loading...')
 enum RewardAdState {
   LOADING,
   NORMAL,
