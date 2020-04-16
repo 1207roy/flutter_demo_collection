@@ -1,5 +1,5 @@
 import 'package:auto_validating_form/validation_using_bloc/login_screen.dart';
-import 'package:auto_validating_form/validation_using_form/login_screen.dart';
+import 'package:auto_validating_form/validation_using_global_key/login_screen.dart';
 import 'package:flutter/material.dart';
 
 class HomePage extends StatelessWidget {
@@ -31,8 +31,8 @@ class HomePage extends StatelessWidget {
 
   Widget _buildFlutterVanillaButton(BuildContext context) {
     return RaisedButton(
-      child: const Text('Auto validation using Form Widget'),
-      onPressed: () => Navigator.pushNamed(context, LoginScreenForValidationUsingForm.routeName),
+      child: const Text('Auto validation using Global key'),
+      onPressed: () => Navigator.pushNamed(context, LoginScreenForValidationUsingGlobalKey.routeName),
     );
   }
 
