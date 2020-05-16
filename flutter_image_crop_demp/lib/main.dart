@@ -1,6 +1,8 @@
 import 'dart:io';
 
 import 'package:flutter/material.dart';
+import 'package:image_cropper/image_cropper.dart';
+import 'package:image_picker/image_picker.dart';
 
 void main() {
   runApp(MyApp());
@@ -29,12 +31,61 @@ class MyHomePage extends StatefulWidget {
 class _MyHomePageState extends State<MyHomePage> {
   File imageFile;
 
-  Future<Null> _pickImage() {
-    //
+  Future<Null> _pickImage() async {
+    imageFile = await ImagePicker.pickImage(source: ImageSource.gallery);
+    if(imageFile != null) {
+      _cropImage();
+    }
   }
 
-  Future<Null> _captureImage() {
-    //
+  Future<Null> _captureImage() async {
+    imageFile = await ImagePicker.pickImage(source: ImageSource.camera);
+    if(imageFile != null) {
+      _cropImage();
+    }
+  }
+
+  Future<Null> _cropImage() async {
+    File croppedFile = await ImageCropper.cropImage(
+        sourcePath: imageFile.path,
+        aspectRatioPresets: Platform.isAndroid
+            ? [
+          CropAspectRatioPreset.square,
+          CropAspectRatioPreset.ratio3x2,
+          CropAspectRatioPreset.original,
+          CropAspectRatioPreset.ratio4x3,
+          CropAspectRatioPreset.ratio16x9
+        ]
+            : [
+          CropAspectRatioPreset.original,
+          CropAspectRatioPreset.square,
+          CropAspectRatioPreset.ratio3x2,
+          CropAspectRatioPreset.ratio4x3,
+          CropAspectRatioPreset.ratio5x3,
+          CropAspectRatioPreset.ratio5x4,
+          CropAspectRatioPreset.ratio7x5,
+          CropAspectRatioPreset.ratio16x9
+        ],
+//        aspectRatio: CropAspectRatio(
+//                ratioX: 1, ratioY: 1),
+//            compressQuality: 100,
+//            maxWidth: 700,
+//            maxHeight: 700,
+//            compressFormat: ImageCompressFormat.jpg,
+        androidUiSettings: AndroidUiSettings(
+            toolbarTitle: 'Cropper',
+            toolbarColor: Colors.deepOrange,
+            toolbarWidgetColor: Colors.white,
+            initAspectRatio: CropAspectRatioPreset.original,
+            lockAspectRatio: false),
+        iosUiSettings: IOSUiSettings(
+          title: 'Cropper',
+        ));
+    if (croppedFile != null) {
+      setState(() {
+        imageFile = croppedFile;
+      });
+    }
   }
 
   void _showImagePickerOption(context) {
