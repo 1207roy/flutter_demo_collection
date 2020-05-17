@@ -1,7 +1,11 @@
 import 'dart:io';
+
+import 'package:file_picker/file_picker.dart';
 import 'package:flutter/material.dart';
-import 'package:videoplaydemo/video_remote_using_chewie.dart';
-import 'package:videoplaydemo/video_remote_using_video_player.dart';
+
+import 'video_asset_using_chewie.dart';
+import 'video_local_using_chewie.dart';
+import 'video_remote_using_chewie.dart';
 
 void main() {
   runApp(MyApp());
@@ -27,7 +31,8 @@ class MyHomePage extends StatefulWidget {
 }
 
 class _MyHomePageState extends State<MyHomePage> {
-  String videoURL = 'https://commondatastorage.googleapis.com/gtv-videos-bucket/sample/BigBuckBunny.mp4';
+  String videoURL =
+      'https://commondatastorage.googleapis.com/gtv-videos-bucket/sample/BigBuckBunny.mp4';
 
   @override
   Widget build(BuildContext context) {
@@ -52,9 +57,29 @@ class _MyHomePageState extends State<MyHomePage> {
     );
   }
 
-  _onPressedAssetPlay() {}
+  _onPressedAssetPlay() {
+    Navigator.push(
+        context,
+        MaterialPageRoute(
+          ///using Chewie library
+          builder: (context) => VideoAssetUsingChewie(
+            videoAssetPath: "assets/20_sec_animation.mp4",
+          ),
+        ));
+  }
 
-  _onPressedLocalPlay(BuildContext context) {}
+  _onPressedLocalPlay(BuildContext context) async {
+    File videoFile = await FilePicker.getFile(type: FileType.video);
+    if (videoFile == null) {
+      print("Video Picked is null");
+    } else {
+      Navigator.push(
+          context,
+          MaterialPageRoute(
+            builder: (context) => VideLocalUsingChewie(videoFile: videoFile),
+          ));
+    }
+  }
 
   _onPressedRemotePlay() {
     Navigator.push(
