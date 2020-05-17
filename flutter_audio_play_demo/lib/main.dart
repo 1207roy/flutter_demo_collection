@@ -1,5 +1,6 @@
 import 'dart:io';
 
+import 'package:audio_play_demo/video_remote_using_chewie.dart';
 import 'package:file_picker/file_picker.dart';
 import 'package:flutter/material.dart';
 
@@ -51,6 +52,10 @@ class _MyHomePageState extends State<MyHomePage> {
           RaisedButton(
             child: Text("Play from URL"),
             onPressed: _onPressedRemotePlay,
+          ),
+          RaisedButton(
+            child: Text("Play from URL - Using video player library"),
+            onPressed: _onPressedRemoteVideoPlay,
           )
         ],
       ),
@@ -83,6 +88,14 @@ class _MyHomePageState extends State<MyHomePage> {
         context,
         MaterialPageRoute(
           builder: (context) => AudioRemote(audioURL: audioURL),
+        ));
+  }
+
+  _onPressedRemoteVideoPlay() {
+    Navigator.push(
+        context,
+        MaterialPageRoute(
+          builder: (context) => VideoRemoteUsingChewie(videoURL: audioURL),
         ));
   }
 }

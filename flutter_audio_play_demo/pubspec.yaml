@@ -24,6 +24,10 @@ dependencies:
   audioplayers: ^0.15.1
   file_picker: ^1.9.0+1
 
+  #for video streaming option
+  video_player: ^0.10.11
+  chewie: ^0.9.10
+
   flutter:
     sdk: flutter
 

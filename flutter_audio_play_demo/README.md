@@ -9,3 +9,5 @@ Library used:
  [audioplayers](https://pub.dev/packages/audioplayers)
  
  [file_picker](https://pub.dev/packages/file_picker)
+
+ [chewie](https://pub.dev/packages/chewie)
