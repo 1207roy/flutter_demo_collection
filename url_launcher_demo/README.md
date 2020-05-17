@@ -6,3 +6,4 @@ Demo prject of URL launcher
 
 Packages Used:
 
+    [url_launcher ](https://pub.dev/packages/url_launcher)
