@@ -8,4 +8,4 @@ Library used:
 
  [video_player](https://pub.dev/packages/video_player)
 
- [file_picker](https://pub.dev/packages/file_picker)
+ [chewie](https://pub.dev/packages/chewie)

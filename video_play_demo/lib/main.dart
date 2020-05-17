@@ -1,5 +1,7 @@
 import 'dart:io';
 import 'package:flutter/material.dart';
+import 'package:videoplaydemo/video_remote_using_chewie.dart';
+import 'package:videoplaydemo/video_remote_using_video_player.dart';
 
 void main() {
   runApp(MyApp());
@@ -25,7 +27,7 @@ class MyHomePage extends StatefulWidget {
 }
 
 class _MyHomePageState extends State<MyHomePage> {
-  String videoURL;
+  String videoURL = 'https://commondatastorage.googleapis.com/gtv-videos-bucket/sample/BigBuckBunny.mp4';
 
   @override
   Widget build(BuildContext context) {
@@ -54,5 +56,14 @@ class _MyHomePageState extends State<MyHomePage> {
 
   _onPressedLocalPlay(BuildContext context) {}
 
-  _onPressedRemotePlay() {}
+  _onPressedRemotePlay() {
+    Navigator.push(
+        context,
+        MaterialPageRoute(
+          ///using Chewie library
+          builder: (context) => VideoRemoteUsingChewie(videoURL: videoURL),
+//          ///using video_player library
+//          builder: (context) => VideoRemoteUsingVideoPlayer(videoURL: videoURL),
+        ));
+  }
 }
