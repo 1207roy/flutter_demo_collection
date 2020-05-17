@@ -27,6 +27,7 @@ dependencies:
   #for video streaming option
   video_player: ^0.10.11
   chewie: ^0.9.10
+  chewie_audio: ^1.0.0+1
 
   flutter:
     sdk: flutter

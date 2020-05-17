@@ -1,32 +1,29 @@
-import 'package:chewie/chewie.dart';
+import 'package:chewie_audio/chewie_audio.dart';
 import 'package:flutter/material.dart';
 import 'package:video_player/video_player.dart';
 
 /// using video_player library
-class VideoRemoteUsingChewie extends StatefulWidget {
-  final String _videoURL;
+class AudioRemoteUsingChewie extends StatefulWidget {
+  final String _audioURL;
 
-  VideoRemoteUsingChewie({@required videoURL})
-      : _videoURL = videoURL,
+  AudioRemoteUsingChewie({@required videoURL})
+      : _audioURL = videoURL,
         assert(videoURL != null);
 
   @override
-  _VideoRemoteUsingChewieState createState() =>
-      _VideoRemoteUsingChewieState();
+  _AudioRemoteUsingChewieState createState() => _AudioRemoteUsingChewieState();
 }
 
-class _VideoRemoteUsingChewieState extends State<VideoRemoteUsingChewie> {
+class _AudioRemoteUsingChewieState extends State<AudioRemoteUsingChewie> {
   VideoPlayerController _videoPlayerController;
-  ChewieController _chewieController;
+  ChewieAudioController _chewieAudioController;
 
   @override
   void initState() {
     super.initState();
-    _videoPlayerController = VideoPlayerController.network(widget._videoURL);
-    _chewieController = ChewieController(
+    _videoPlayerController = VideoPlayerController.network(widget._audioURL);
+    _chewieAudioController = ChewieAudioController(
       videoPlayerController: _videoPlayerController,
-//      aspectRatio: 3 / 2,
-      aspectRatio: _videoPlayerController.value.aspectRatio,
       autoPlay: true,
       looping: true,
       // Try playing around with some of these other options:
@@ -48,7 +45,7 @@ class _VideoRemoteUsingChewieState extends State<VideoRemoteUsingChewie> {
   @override
   void dispose() {
     _videoPlayerController.dispose();
-    _chewieController.dispose();
+    _chewieAudioController.dispose();
     super.dispose();
   }
 
@@ -62,8 +59,8 @@ class _VideoRemoteUsingChewieState extends State<VideoRemoteUsingChewie> {
         children: <Widget>[
           Expanded(
             child: Center(
-              child: Chewie(
-                controller: _chewieController,
+              child: ChewieAudio(
+                controller: _chewieAudioController,
               ),
             ),
           ),
