@@ -1,16 +1,21 @@
-# fcmdemo
+# fcm demo project
 
-A new Flutter application.
+A demo project for firebase cloud messaging.
 
 ## Getting Started
 
-This project is a starting point for a Flutter application.
+Library used:
 
-A few resources to get you started if this is your first Flutter project:
+- [firebase_messaging](https://pub.dev/packages/firebase_messaging)
 
-- [Lab: Write your first Flutter app](https://flutter.dev/docs/get-started/codelab)
-- [Cookbook: Useful Flutter samples](https://flutter.dev/docs/cookbook)
+For help getting started with FCM, follow these steps:
 
-For help getting started with Flutter, view our
-[online documentation](https://flutter.dev/docs), which offers tutorials,
-samples, guidance on mobile development, and a full API reference.
+1. Download the google-service.json file, after registering you app.
+    - To register the app with firebase, we need app package name and SHA-1 key of app's signing certificate.
+    - Here we have used debug certificate from the [official site](https://developers.google.com/android/guides/client-auth), but in production we will have to use the SHA-1 key from your signing keystore file.
+2. After that, just follows the steps from [firebase_messaging](https://pub.dev/packages/firebase_messaging)
+
+
+You can send the test fcm from firebase console:
+Navigate to Firebase project -> Grow -> Cloud Messaging menu (from Left side slider menu).
+Send test message to your device token id.

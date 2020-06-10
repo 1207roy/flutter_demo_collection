@@ -52,3 +52,12 @@ android {
 flutter {
     source '../..'
 }
+
+dependencies {
+
+    //for fcm - background messages handling
+    implementation 'com.google.firebase:firebase-messaging:20.2.0'
+}
+
+//for fcm
+apply plugin: 'com.google.gms.google-services'
