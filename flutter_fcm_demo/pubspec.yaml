@@ -28,6 +28,13 @@ dependencies:
   # https://pub.dev/packages/firebase_messaging
   firebase_messaging: ^5.0.4
 
+  #to raise the local notification
+  # https://pub.dev/packages/flutter_local_notifications
+  flutter_local_notifications: ^1.4.4+1
+
+  path_provider:
+  http:
+
   # The following adds the Cupertino Icons font to your application.
   # Use with the CupertinoIcons class for iOS style icons.
   cupertino_icons: ^0.1.3
