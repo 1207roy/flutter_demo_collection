@@ -32,9 +32,11 @@ class AuthenticationBloc
     try {
       yield AuthenticationLoading();
 
-      final bool isSignedIn = await _userRepository.isSignedIn();
+//      final bool isSignedIn = await _userRepository.isSignedIn();
+      final bool isSignedIn = true;
       if (isSignedIn) {
-        yield AuthenticationAuthenticated(displayName: (await _userRepository.getUser()).email);
+//        yield AuthenticationAuthenticated(displayName: (await _userRepository.getUser()).email);
+        yield AuthenticationAuthenticated(displayName: 'Abc');
       } else {
         yield AuthenticationUnauthenticated();
       }
