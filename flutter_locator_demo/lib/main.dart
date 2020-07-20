@@ -1,8 +1,9 @@
 import 'package:flutter/material.dart';
+import 'package:flutterlocatordemo/geo_locator_service.dart' as geoLocator;
+import 'package:geolocator/geolocator.dart';
+import 'package:share/share.dart';
 
-void main() {
-  runApp(MyApp());
-}
+void main() => runApp(MyApp());
 
 class MyApp extends StatelessWidget {
   // This widget is the root of your application.
@@ -24,6 +25,8 @@ class MyHomePage extends StatefulWidget {
 }
 
 class _MyHomePageState extends State<MyHomePage> {
+  Position _currentPosition;
+  Placemark _currentPlaceMark;
 
   @override
   Widget build(BuildContext context) {
@@ -31,7 +34,40 @@ class _MyHomePageState extends State<MyHomePage> {
       appBar: AppBar(
         title: Text(widget.title),
       ),
-      body: Container(),
+      body: Center(
+        child: Column(
+          mainAxisAlignment: MainAxisAlignment.center,
+          children: <Widget>[
+            FlatButton(
+              child: Text('Get Location'),
+              onPressed: () => _getLocation(),
+            ),
+            Visibility(
+              visible: _currentPosition != null,
+              child: Text(
+                  "LAT: ${_currentPosition?.latitude ?? ''}, LNG: ${_currentPosition?.longitude ?? ''}"),
+            ),
+            Visibility(
+              visible: _currentPlaceMark != null,
+              child: Text(
+                  "Address: ${_currentPlaceMark?.locality ?? ''} ${_currentPlaceMark?.country ?? ''}, ${_currentPlaceMark?.postalCode ?? ''}"),
+            ),
+            Visibility(
+              visible: _currentPlaceMark != null,
+              child: FlatButton(
+                child: Text('Share Location'),
+                onPressed: () => Share.share(geoLocator.placeMarkDataToString(_currentPlaceMark)),
+              ),
+            ),
+          ],
+        ),
+      ),
     );
+  }
+
+  _getLocation() async {
+    _currentPosition = await geoLocator.currentPosition;
+    _currentPlaceMark = await geoLocator.currentPlaceMark;
+    setState(() {});
   }
 }
