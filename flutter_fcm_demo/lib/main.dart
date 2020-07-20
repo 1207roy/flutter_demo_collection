@@ -12,7 +12,7 @@ final FirebaseMessaging _firebaseMessaging = FirebaseMessaging();
 //for local notification
 final FlutterLocalNotificationsPlugin flutterLocalNotificationsPlugin =
     FlutterLocalNotificationsPlugin();
-NotificationAppLaunchDetails notificationAppLaunchDetails;
+//NotificationAppLaunchDetails notificationAppLaunchDetails;
 //final BehaviorSubject<String> selectNotificationSubject = BehaviorSubject<String>();
 
 void main() async {
@@ -38,8 +38,8 @@ initializeLocalNotifications() async {
 //      selectNotificationSubject.add(payload);
   }
 
-  notificationAppLaunchDetails =
-      await flutterLocalNotificationsPlugin.getNotificationAppLaunchDetails();
+//  notificationAppLaunchDetails =
+//      await flutterLocalNotificationsPlugin.getNotificationAppLaunchDetails();
 
   var initializationSettingsAndroid =
       AndroidInitializationSettings('@mipmap/ic_launcher');
@@ -174,7 +174,6 @@ class _MyHomePageState extends State<MyHomePage> {
                   child: Text("Register My Device"),
                   onPressed: () async {
                     print('token: ${await _firebaseMessaging.getToken()}');
-                    _showLocalNotification();
                   },
                 ),
                 // Text("Message: $message")
