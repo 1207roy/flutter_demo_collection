@@ -2,9 +2,10 @@ import 'dart:async';
 
 import 'package:geolocator/geolocator.dart';
 
-//By default Geolocator will use FusedLocationProviderClient on Android when Google Play Services are available.
+//For Android, by default Geolocator will use FusedLocationProviderClient on Android when Google Play Services are available.
 // It will fall back to LocationManager when it is not available.
-// You can override the behaviour by setting forceAndroidLocationManager
+// You can override the behaviour by setting forceAndroidLocationManager.
+// For iPhone. it will just ignore this variable.
 final Geolocator geoLocator = Geolocator();
 //  ..forceAndroidLocationManager = true;
 
@@ -13,17 +14,37 @@ Future<GeolocationStatus> get geolocationStatus =>
     geoLocator.checkGeolocationPermissionStatus();
 
 //To get the current position coordinates
-Future<Position> get currentPosition => geoLocator.getCurrentPosition();
+Future<Position> get currentPosition => geoLocator.getCurrentPosition().catchError((error, __) => null);
 
 //To get the last known position coordinates
-Future<Position> get lastKnowPosition => geoLocator.getLastKnownPosition();
+Future<Position> get lastKnowPosition => geoLocator.getLastKnownPosition().catchError((error, __) => null);
 
 //To get the current placeMark object
 Future<Placemark> get currentPlaceMark async =>
     getPlaceMark(await currentPosition);
 
+Future<String> get errorMessage async {
+  GeolocationStatus _geolocationStatus = await geolocationStatus;
+  switch(_geolocationStatus) {
+    case GeolocationStatus.granted:
+      return null;
+    case GeolocationStatus.denied:
+      return 'Permission status is denied';
+    case GeolocationStatus.disabled:
+      return 'Permission status is disabled';
+    case GeolocationStatus.restricted:
+      return 'Permission status is restricted';
+    case GeolocationStatus.unknown:
+      return 'Permission status is unknown';
+  }
+  return 'something wrong';
+}
+
 //To get the placeMark object from the given position coordinates
 Future<Placemark> getPlaceMark(Position position) async {
+  if(position == null) return null;
+
+
   List<Placemark> placeMarkList = await geoLocator.placemarkFromCoordinates(
       position.latitude, position.longitude);
 
@@ -39,7 +60,7 @@ Future<Placemark> getPlaceMark(Position position) async {
           subLocality: ${place.subLocality},
           thoroughfare: ${place.thoroughfare},
           subThoroughfare: ${place.subThoroughfare},
-          positio: ${place.position},
+          position: ${place.position},
         )''');
   }
 

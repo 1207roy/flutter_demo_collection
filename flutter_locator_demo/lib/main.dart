@@ -27,6 +27,7 @@ class MyHomePage extends StatefulWidget {
 class _MyHomePageState extends State<MyHomePage> {
   Position _currentPosition;
   Placemark _currentPlaceMark;
+  String _error;
 
   @override
   Widget build(BuildContext context) {
@@ -53,6 +54,11 @@ class _MyHomePageState extends State<MyHomePage> {
                   "Address: ${_currentPlaceMark?.locality ?? ''} ${_currentPlaceMark?.country ?? ''}, ${_currentPlaceMark?.postalCode ?? ''}"),
             ),
             Visibility(
+              visible: _error != null,
+              child: Text(
+                  "Error: $_error"),
+            ),
+            Visibility(
               visible: _currentPlaceMark != null,
               child: FlatButton(
                 child: Text('Share Location'),
@@ -66,8 +72,18 @@ class _MyHomePageState extends State<MyHomePage> {
   }
 
   _getLocation() async {
+    _error = null;
+    print('before: geoPermisionStatus: ${await geoLocator.geolocationStatus}');
+
     _currentPosition = await geoLocator.currentPosition;
-    _currentPlaceMark = await geoLocator.currentPlaceMark;
+    print('after: geoPermisionStatus: ${await geoLocator.geolocationStatus}');
+    _error = await geoLocator.errorMessage;
+
+    if (_error == null) {
+      _currentPlaceMark = await geoLocator.currentPlaceMark;
+    }
+
+
     setState(() {});
   }
 }
